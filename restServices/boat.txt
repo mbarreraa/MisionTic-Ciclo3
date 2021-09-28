@@ -1,0 +1,33 @@
+-- boat GET
+select * from BOAT
+
+-- boat POST
+BEGIN
+    INSERT INTO BOAT (ID, BRAND, MODEL, CATEGORY_ID, NAME) 
+    VALUES (:id, :brand, :model, :category_id, :name);
+    :status_code:=201;
+END;
+
+-- boat PUT
+BEGIN
+    UPDATE BOAT
+    SET BRAND = :brand, 
+        MODEL = :model, 
+        CATEGORY_ID = :category_id, 
+        NAME = :name
+    WHERE ID = :id;
+    :status_code:=201;
+END;
+
+-- boat DELETE
+BEGIN
+    DELETE FROM BOAT
+    WHERE ID = :id;
+    :status_code:=204;
+END;
+
+-- boat/:id GET
+SELECT * FROM BOAT WHERE ID = :id
+
+https://g07d02e4c9c4e91-dbmbarreraa.adb.us-sanjose-1.oraclecloudapps.com
+
