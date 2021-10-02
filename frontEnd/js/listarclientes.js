@@ -13,7 +13,7 @@ $(document).ready(function () {
 function listar() {
     $.ajax({
         // la URL para la petición (url: "url al recurso o endpoint")
-        url: "https://g07d02e4c9c4e91-dbmbarreraa.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/boat/boat",
+        url: "https://g07d02e4c9c4e91-dbmbarreraa.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client",
         
         // la información a enviar
         // (también es posible utilizar una cadena de datos)
@@ -46,7 +46,7 @@ function listar() {
 
         // código a ejecutar sin importar si la petición falló o no
         complete: function (xhr, status) {
-            $("#mensajes").html("Obteniendo listado de botes...");
+            $("#mensajes").html("Obteniendo listado de clientes");
             $("#mensajes").hide(1000);
         }
     });
@@ -66,20 +66,18 @@ function listarRespuesta(items) {
     //encabezados o títulos de la tabla
     var tabla = `<table border="1">
                   <tr>
-                    <th>Marca</th>
-                    <th>Modelo</th>
-                    <th>Categoria</th>
                     <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Edad</th>
                     <th colspan="2">Acciones</th>
                   </tr>`;
                   
     //recorre el arreglo de 'items' y construye dinamicamente la fila de datos de la tabla
     for (var i=0; i < items.length; i++) {
         tabla +=`<tr>
-                   <td>${items[i].brand}</td>
-                   <td>${items[i].model}</td>
-                   <td>${items[i].category_id}</td>
                    <td>${items[i].name}</td>
+                   <td>${items[i].email}</td>
+                   <td>${items[i].age}</td>
                    <td><button onclick="editarRegistro(${items[i].id})">Editar</button></td>
                    <td><button onclick="borrarRegistro(${items[i].id})">Borrar</button></td>
                    </tr>`;

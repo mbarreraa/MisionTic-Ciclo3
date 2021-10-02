@@ -5,10 +5,10 @@ function registrar() {
     //crea un objeto javascript
     let datos={
         id: $("#id").val(),
-        brand: $("#brand").val(),
-        model: $("#model").val(),
-        category_id: $("#category").val(),
-        name: $("#name").val()
+        name: $("#name").val(),
+        email: $("#email").val(),
+        age: $("#age").val()
+        
     }
 
     //convierte el objeto javascript a json antes de agregarlo a los datos de la petición
@@ -17,7 +17,7 @@ function registrar() {
     if (validar()){
         $.ajax({
             // la URL para la petición (url: "url al recurso o endpoint")
-            url: "https://g07d02e4c9c4e91-dbmbarreraa.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/boat/boat",
+            url: "https://g07d02e4c9c4e91-dbmbarreraa.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client",
             
             // la información a enviar
             // (también es posible utilizar una cadena de datos)

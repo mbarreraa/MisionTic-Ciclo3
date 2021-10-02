@@ -13,7 +13,7 @@ function editarRegistro(llaveRegistro) {
 
     $.ajax({
         // la URL para la petición (url: "url al recurso o endpoint")
-        url: "https://g07d02e4c9c4e91-dbmbarreraa.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/boat/boat/" + llaveRegistro,
+        url: "https://g07d02e4c9c4e91-dbmbarreraa.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client/" + llaveRegistro,
 
         // la información a enviar
         // (también es posible utilizar una cadena de datos)
@@ -61,9 +61,8 @@ function editarRegistro(llaveRegistro) {
 function editarRespuesta(items) {
     $("#idEdit").val(items[0].id);
     $("#nameEdit").val(items[0].name);
-    $("#brandEdit").val(items[0].brand);
-    $("#modelEdit").val(items[0].model);
-    $("#categoryEdit").val(items[0].category_id);    
+    $("#emailEdit").val(items[0].email);
+    $("#ageEdit").val(items[0].age);
 }
 
 //Esta función ejecuta la petición asincrona al servidor de Oracle, envia una
@@ -73,10 +72,9 @@ function actualizar() {
     //crea un objeto javascript
     let datos = {
         id: $("#idEdit").val(),
-        brand: $("#brandEdit").val(),
-        model: $("#modelEdit").val(),
-        category_id: $("#categoryEdit").val(),
-        name: $("#nameEdit").val()
+        name: $("#nameEdit").val(),
+        email: $("#emailEdit").val(),
+        age: $("#ageEdit").val()        
     }
 
     //convierte el objeto javascript a json antes de agregarlo a los datos de la petición
@@ -85,7 +83,7 @@ function actualizar() {
     if (validarEditar()) {
         $.ajax({
             // la URL para la petición (url: "url al recurso o endpoint")
-            url: "https://g07d02e4c9c4e91-dbmbarreraa.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/boat/boat",
+            url: "https://g07d02e4c9c4e91-dbmbarreraa.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client",
 
             // la información a enviar
             // (también es posible utilizar una cadena de datos)
@@ -106,7 +104,7 @@ function actualizar() {
                 //escribe en la consola del desarrollador para efectos de depuración
                 console.log(respuesta);
                 $("#mensajes").show(1000);
-                $("#mensajes").html("Registro actaulizado...");
+                $("#mensajes").html("Registro actualizado...");
                 $("#mensajes").hide(1000);
                 listar();
                 estadoInicial();

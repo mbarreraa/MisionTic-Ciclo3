@@ -1,0 +1,34 @@
+-- client GET
+select * from CLIENT
+
+-- client POST
+BEGIN
+    INSERT INTO CLIENT (ID, NAME, EMAIL, AGE) 
+    VALUES (:id, :name, :email, :age);
+    :status_code:=201;
+END;
+
+-- client PUT
+BEGIN
+    UPDATE CLIENT
+    SET NAME = :name, 
+        EMAIL = :email, 
+        AGE = :age
+    WHERE ID = :id;
+    :status_code:=201;
+END;
+
+-- client DELETE
+BEGIN
+    DELETE FROM CLIENT
+    WHERE ID = :id;
+    :status_code:=204;
+END;
+
+-- client/:id GET
+SELECT * FROM CLIENT WHERE ID = :id
+
+https://g07d02e4c9c4e91-dbmbarreraa.adb.us-sanjose-1.oraclecloudapps.com
+https://g07d02e4c9c4e91-dbmbarreraa.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client
+https://g07d02e4c9c4e91-dbmbarreraa.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client/:id
+
