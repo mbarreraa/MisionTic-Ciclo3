@@ -4,12 +4,12 @@
  */
 package co.edu.usa.mt.ciclo3.boat.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,27 +29,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Reservation {
+public class Reservation implements Serializable {
 
-    /*
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idReservation;
-    @Column(name = "startDate", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date startDate;
-    @Column(name = "devolutionDate", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date devolutionDate;
-    @Column(name = "status", nullable = false, length = 20)
-    private String status;
-    @JoinColumn(name = "boat_id", referencedColumnName = "id")
-    @ManyToOne
-    private Boat boatId;
-    @JoinColumn(name = "client_id", referencedColumnName = "id_client", nullable = false)
-    @ManyToOne(optional = false)
-    private Client clientId;
-     */
     @Id
     @Basic(optional = false)
     @Column(name = "idReservation")
@@ -63,12 +44,16 @@ public class Reservation {
     @Temporal(TemporalType.DATE)
     private Date devolutionDate;
     @Basic(optional = false)
-    @Column(name = "status")
+    @Column(name = "status", length = 20)
     private String status;
-    @JoinColumn(name = "boat_id", referencedColumnName = "id")
+    
     @ManyToOne
-    private Boat boatId;
-    @JoinColumn(name = "client_id", referencedColumnName = "id_client")
+    @JoinColumn(name = "boat_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("reservations")
+    private Boat boat;
+    
     @ManyToOne(optional = false)
-    private Client clientId;
+    @JoinColumn(name = "client_id", referencedColumnName = "id_client")
+    @JsonIgnoreProperties("reservations")
+    private Client client;
 }

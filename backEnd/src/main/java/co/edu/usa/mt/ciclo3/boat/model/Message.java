@@ -4,11 +4,11 @@
  */
 package co.edu.usa.mt.ciclo3.boat.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,31 +26,22 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Message {
+public class Message implements Serializable {
 
-    /*
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idMessage;
-    @Column(name = "message_text", length = 250)
-    private String messageText;
-    @JoinColumn(name = "boat_id", referencedColumnName = "id")
-    @ManyToOne
-    private Boat boatId;
-    @JoinColumn(name = "client_id", referencedColumnName = "id_client", nullable = false)
-    @ManyToOne(optional = false)
-    private Client clientId;
-     */
     @Id
     @Basic(optional = false)
     @Column(name = "id_message")
     private Integer idMessage;
-    @Column(name = "message_text")
+    @Column(name = "message_text", length = 250)
     private String messageText;
-    @JoinColumn(name = "boat_id", referencedColumnName = "id")
+    
     @ManyToOne
-    private Boat boatId;
-    @JoinColumn(name = "client_id", referencedColumnName = "id_client")
+    @JoinColumn(name = "boat_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("messages")
+    private Boat boat;
+    
     @ManyToOne(optional = false)
-    private Client clientId;
+    @JoinColumn(name = "client_id", referencedColumnName = "id_client")
+    @JsonIgnoreProperties("messages")
+    private Client client;
 }
