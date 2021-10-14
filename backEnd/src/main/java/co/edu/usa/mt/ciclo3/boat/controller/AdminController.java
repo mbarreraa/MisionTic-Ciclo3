@@ -5,17 +5,17 @@
  */
 package co.edu.usa.mt.ciclo3.boat.controller;
 
-import co.edu.usa.mt.ciclo3.boat.model.Boat;
-import co.edu.usa.mt.ciclo3.boat.service.BoatService;
+import co.edu.usa.mt.ciclo3.boat.model.Admin;
+import co.edu.usa.mt.ciclo3.boat.service.AdminService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -24,16 +24,16 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author miguel
  */
 @RestController
-@RequestMapping("/Boat")
+@RequestMapping("/Admin")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-public class BoatController {
+public class AdminController {
     
     @Autowired
-    private BoatService boatService;
-        
+    private AdminService adminService;
+    
     @GetMapping("/all")
-    public List<Boat> list() {
-        return boatService.getAll();
+    public List<Admin> list() {
+        return adminService.getAll();
     }
     /*
     @GetMapping("/{id}")
@@ -48,18 +48,13 @@ public class BoatController {
     */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Boat save(@RequestBody Boat boat) {
-        return boatService.save(boat);
+    public Admin save(@RequestBody Admin admin) {
+        return adminService.save(admin);
     }
     /*
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable String id) {
         return null;
-    }
-    
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Error message")
-    public void handleError() {
     }
     */
 }

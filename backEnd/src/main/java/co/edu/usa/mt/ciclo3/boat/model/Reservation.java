@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -56,4 +57,9 @@ public class Reservation implements Serializable {
     @JoinColumn(name = "client_id", referencedColumnName = "id_client")
     @JsonIgnoreProperties("reservations")
     private Client client;
+    
+    @OneToOne
+    @JsonIgnoreProperties("reservation")
+    private Score score;
+
 }
