@@ -7,7 +7,7 @@ package co.edu.usa.mt.ciclo3.boat.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,16 +32,15 @@ import lombok.NoArgsConstructor;
 public class Category implements Serializable {
 
     @Id
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
     @Column(name = "name", nullable = false, length = 45)
     private String name;
     @Column(name = "description", length = 250)
     private String description;
     
-    @OneToMany(mappedBy = "category")
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "category")
     @JsonIgnoreProperties("category")
     private List<Boat> boats;
 }

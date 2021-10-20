@@ -7,9 +7,11 @@ package co.edu.usa.mt.ciclo3.boat.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,32 +35,29 @@ import lombok.NoArgsConstructor;
 public class Reservation implements Serializable {
 
     @Id
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idReservation")
     private Integer idReservation;
-    @Basic(optional = false)
     @Column(name = "startDate")
     @Temporal(TemporalType.DATE)
     private Date startDate;
-    @Basic(optional = false)
     @Column(name = "devolutionDate")
     @Temporal(TemporalType.DATE)
     private Date devolutionDate;
-    @Basic(optional = false)
     @Column(name = "status", length = 20)
-    private String status;
+    private String status = "created";
     
     @ManyToOne
-    @JoinColumn(name = "boat_id", referencedColumnName = "id")
+    @JoinColumn(name = "boatId")
     @JsonIgnoreProperties("reservations")
     private Boat boat;
     
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "client_id", referencedColumnName = "id_client")
-    @JsonIgnoreProperties("reservations")
+    @ManyToOne
+    @JoinColumn(name = "clientId")
+    @JsonIgnoreProperties({"reservations", "messages"})
     private Client client;
     
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.REMOVE}, mappedBy = "reservation")
     @JsonIgnoreProperties("reservation")
     private Score score;
 

@@ -6,7 +6,6 @@
 package co.edu.usa.mt.ciclo3.boat.model;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,17 +32,9 @@ public class Admin implements Serializable {
     private Integer idAdmin;
     @Column(name = "email", length = 45)
     private String email;
-    @Basic(optional = false)
     @Column(name = "password", nullable = false, length = 45)
     private String password;
-    @Basic(optional = false)
     @Column(name = "name", nullable = false, length = 250)
     private String name;
 
 }
-/*
-
-
-
-
-*/
