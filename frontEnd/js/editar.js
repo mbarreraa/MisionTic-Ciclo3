@@ -3,6 +3,8 @@
  * y pintar información en el formulario de edición
  */
 function editarRegistro(llaveRegistro) {
+    alert("Funcionalidad pendiente hasta el reto 4...")
+    /*
     //crea un objeto javascript
     let datos = {
         id: llaveRegistro
@@ -13,7 +15,7 @@ function editarRegistro(llaveRegistro) {
 
     $.ajax({
         // la URL para la petición (url: "url al recurso o endpoint")
-        url: "https://g07d02e4c9c4e91-dbmbarreraa.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/boat/boat/" + llaveRegistro,
+        url: "https://g2c7d8c8e491995-db202109201320.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/boat/boat/" + llaveRegistro,
 
         // la información a enviar
         // (también es posible utilizar una cadena de datos)
@@ -49,6 +51,7 @@ function editarRegistro(llaveRegistro) {
             //$("#mensajes").hide(1000);
         }
     });
+    */
 }
 
 /* 
@@ -85,7 +88,7 @@ function actualizar() {
     if (validarEditar()) {
         $.ajax({
             // la URL para la petición (url: "url al recurso o endpoint")
-            url: "https://g07d02e4c9c4e91-dbmbarreraa.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/boat/boat",
+            url: "https://g2c7d8c8e491995-db202109201320.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/boat/boat",
 
             // la información a enviar
             // (también es posible utilizar una cadena de datos)

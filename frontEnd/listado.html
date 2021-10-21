@@ -12,8 +12,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/listar.js"></script>
     <script src="js/registrar.js"></script>
-    <script src="js/editar.js"></script>
-    <script src="js/borrar.js"></script>
     <script src="js/funciones.js"></script>
 </head>
 
@@ -28,18 +26,25 @@
         <br>
         <a href="index.html"><img src="img/back.png" alt="Regresar"></a>
         
-        <button id="nuevoRegistro" onclick="activaNuevo();">Registrar Disfraz</button>
+        <button id="nuevoRegistro" onclick="activaNuevo();">Registrar Bote</button>
         <!--aqui se actualizara el listado -->
         <div id="listado"></div>
 
         <!-- Seccion para nuevos registros-->
         <div id="nuevo">
             <h3>Registrar Bote</h3>
-            <input type="number" id="id" placeholder="id">
-            <input type="text" id="name" placeholder="name">
-            <input type="text" id="brand" placeholder="brand">
-            <input type="number" id="model" placeholder="model">
-            <input type="number" id="category" placeholder="category_id">
+            <input type="text" id="name" placeholder="Nombre" onkeydown="upperCaseF(this)">
+            <br><br>
+            <input type="text" id="brand" placeholder="Marca" onkeydown="upperCaseF(this)">
+            <br><br>
+            <input type="number" id="year" placeholder="Año">
+            <br><br>
+            <select id="category" placeholder="Categoria">
+                
+            </select>
+            <br><br>
+            <textarea id="description" placeholder="Descripción" rows="4" cols="50"  onkeydown="upperCaseF(this)"></textarea>
+            <br><br>
             <button onclick="registrar();">Guardar</button>
             <button onclick="estadoInicial();">Cancelar</button>
         </div>
