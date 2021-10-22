@@ -39,10 +39,10 @@ public class Reservation implements Serializable {
     @Column(name = "idReservation")
     private Integer idReservation;
     @Column(name = "startDate")
-    @Temporal(TemporalType.DATE)
+    //@Temporal(TemporalType.DATE)
     private Date startDate;
     @Column(name = "devolutionDate")
-    @Temporal(TemporalType.DATE)
+    //@Temporal(TemporalType.DATE)
     private Date devolutionDate;
     @Column(name = "status", length = 20)
     private String status = "created";
