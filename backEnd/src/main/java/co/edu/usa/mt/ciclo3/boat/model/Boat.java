@@ -44,18 +44,18 @@ public class Boat implements Serializable {
     private Integer year;
     @Column(name = "description", length = 250, nullable = true)
     private String description;
-    
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "boat")
-    @JsonIgnoreProperties({"boat", "messages"})
-    private List<Reservation> reservations;
-    
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "boat")
-    @JsonIgnoreProperties({"boat", "client"})
-    private List<Message> messages;
-    
+
     @ManyToOne
     @JoinColumn(name = "categoryId")
     @JsonIgnoreProperties("boats")
     private Category category;
+    
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "boat")
+    @JsonIgnoreProperties({"boat", "client"})
+    private List<Message> messages;
+
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "boat")
+    @JsonIgnoreProperties({"boat", "messages"})
+    private List<Reservation> reservations;
 
 }

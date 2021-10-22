@@ -13,8 +13,8 @@ $(document).ready(function () {
 function listar() {
     $.ajax({
         // la URL para la petición (url: "url al recurso o endpoint")
-        //url: "http://localhost:8081/api/Client/all",
-        url: "http://localhost:8081/api/Client/all",
+        //url: "http://150.230.33.49:8081/api/Client/all",
+        url: "http://150.230.33.49:8081/api/Client/all",
         
         
         // la información a enviar
