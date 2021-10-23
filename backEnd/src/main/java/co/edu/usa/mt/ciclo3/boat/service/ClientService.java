@@ -40,4 +40,45 @@ public class ClientService {
             }
         }
     }
+    
+    public boolean delete(int id){
+        Optional<Client> dbBoat = clientRepository.getClient(id);
+        boolean exito = false;
+        if (!dbBoat.isEmpty()){
+            clientRepository.delete(dbBoat.get());
+            exito = true;
+        }
+        return exito;
+    }
+    
+    public Client update(Client client) {
+
+        if (client.getIdClient() != null) {
+            Optional<Client> dbClient = clientRepository.getClient(client.getIdClient());
+
+            if (!dbClient.isEmpty()) {
+                if (client.getName() != null) {
+                    dbClient.get().setName(client.getName());
+                }
+                if (client.getAge()!= null) {
+                    dbClient.get().setAge(client.getAge());
+                }
+                if (client.getEmail()!= null) {
+                    dbClient.get().setEmail(client.getEmail());
+                }
+                if (client.getPassword()!= null) {
+                    dbClient.get().setPassword(client.getPassword());
+                }
+                return clientRepository.save(dbClient.get());
+            } else {
+                return client;
+            }
+
+        }
+        return client;
+    }
+
+    public Optional<Client> getById(int id) {
+        return clientRepository.getClient(id);
+    }
 }

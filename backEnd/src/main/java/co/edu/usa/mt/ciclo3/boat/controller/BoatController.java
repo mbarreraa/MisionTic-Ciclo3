@@ -10,12 +10,16 @@ import co.edu.usa.mt.ciclo3.boat.service.BoatService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -25,8 +29,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 @RestController
 @RequestMapping("/Boat")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
-//@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class BoatController {
     
     @Autowired
@@ -36,31 +39,25 @@ public class BoatController {
     public List<Boat> list() {
         return boatService.getAll();
     }
-    /*
+    
     @GetMapping("/{id}")
-    public Object get(@PathVariable String id) {
-        return null;
+    public Optional<Boat> getById(@PathVariable int id) {
+        return boatService.getById(id);
     }
     
-    @PutMapping("/{id}")
-    public ResponseEntity<?> put(@PathVariable String id, @RequestBody Object input) {
-        return null;
-    }
-    */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Boat save(@RequestBody Boat boat) {
         return boatService.save(boat);
     }
-    /*
+    
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable String id) {
-        return null;
+    public boolean delete(@PathVariable int id) {
+        return boatService.delete(id);
     }
     
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Error message")
-    public void handleError() {
+    @PutMapping("/update")
+    public Boat update(@RequestBody Boat boat) {
+        return boatService.update(boat);
     }
-    */
 }

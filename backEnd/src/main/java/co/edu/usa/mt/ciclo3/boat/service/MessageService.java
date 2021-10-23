@@ -41,4 +41,37 @@ public class MessageService {
             }
         }
     }
+    
+    
+    public boolean delete(int id){
+        Optional<Message> dbMessage = messageRepository.getMessage(id);
+        boolean exito = false;
+        if (!dbMessage.isEmpty()){
+            messageRepository.delete(dbMessage.get());
+            exito = true;
+        }
+        return exito;
+    }
+    
+    public Message update(Message message) {
+
+        if (message.getIdMessage() != null) {
+            Optional<Message> dbMessage = messageRepository.getMessage(message.getIdMessage());
+
+            if (!dbMessage.isEmpty()) {
+                if (message.getMessageText()!= null) {
+                    dbMessage.get().setMessageText(message.getMessageText());
+                }
+                return messageRepository.save(dbMessage.get());
+            } else {
+                return message;
+            }
+
+        }
+        return message;
+    }
+
+    public Optional<Message> getById(int id) {
+        return messageRepository.getMessage(id);
+    }
 }

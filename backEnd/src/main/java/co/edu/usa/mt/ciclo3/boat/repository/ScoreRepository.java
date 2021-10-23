@@ -26,11 +26,15 @@ public class ScoreRepository {
         return (List<Score>) scoreCrudRepository.findAll();
     }
     
-    public Optional<Score> getBoat(int id){
+    public Optional<Score> get(int id){
         return scoreCrudRepository.findById(id);
     }
     
     public Score save(Score score){
         return scoreCrudRepository.save(score);
+    }
+    
+    public void delete(Score score){
+        scoreCrudRepository.delete(score);
     }
 }

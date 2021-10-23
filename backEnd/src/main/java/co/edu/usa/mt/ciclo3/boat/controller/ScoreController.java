@@ -10,12 +10,16 @@ import co.edu.usa.mt.ciclo3.boat.service.ScoreService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -25,8 +29,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 @RestController
 @RequestMapping("/Score")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
-//@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ScoreController {
     
     @Autowired
@@ -36,26 +39,25 @@ public class ScoreController {
     public List<Score> list() {
         return scoreService.getAll();
     }
-    /*
+    
     @GetMapping("/{id}")
-    public Object get(@PathVariable String id) {
-        return null;
+    public Optional<Score> getById(@PathVariable int id) {
+        return scoreService.getById(id);
     }
     
-    @PutMapping("/{id}")
-    public ResponseEntity<?> put(@PathVariable String id, @RequestBody Object input) {
-        return null;
-    }
-    */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Score save(@RequestBody Score score) {
         return scoreService.save(score);
     }
-    /*
+    
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable String id) {
-        return null;
+    public boolean delete(@PathVariable int id) {
+        return scoreService.delete(id);
     }
-    */
+    
+    @PutMapping("/update")
+    public Score update(@RequestBody Score score) {
+        return scoreService.update(score);
+    }
 }

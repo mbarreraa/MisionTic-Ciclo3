@@ -26,12 +26,16 @@ public class AdminService {
         return adminRepository.getAll();
     }
     
+    public Optional<Admin> getById(int id){
+        return adminRepository.get(id);
+    }
+    
     public Admin save(Admin admin){
         
         if (admin.getIdAdmin()== null){
             return adminRepository.save(admin);
         } else {
-            Optional<Admin> existent = adminRepository.getBoat(admin.getIdAdmin());
+            Optional<Admin> existent = adminRepository.get(admin.getIdAdmin());
             
             if (existent.isEmpty() ){
                 return adminRepository.save(admin);
@@ -39,5 +43,39 @@ public class AdminService {
                 return admin;
             }
         }
+    }
+    
+    public boolean delete(int id){
+        Optional<Admin> dbAdmin = adminRepository.get(id);
+        boolean exito = false;
+        if (!dbAdmin.isEmpty()){
+            adminRepository.delete(dbAdmin.get());
+            exito = true;
+        }
+        return exito;
+    }
+    
+    public Admin update(Admin admin) {
+
+        if (admin.getIdAdmin() != null) {
+            Optional<Admin> dbAdmin = adminRepository.get(admin.getIdAdmin());
+
+            if (!dbAdmin.isEmpty()) {
+                if (admin.getName() != null) {
+                    dbAdmin.get().setName(admin.getName());
+                }
+                if (admin.getEmail()!= null) {
+                    dbAdmin.get().setEmail(admin.getEmail());
+                }
+                if (admin.getPassword()!= null) {
+                    dbAdmin.get().setPassword(admin.getPassword());
+                }
+                return adminRepository.save(dbAdmin.get());
+            } else {
+                return admin;
+            }
+
+        }
+        return admin;
     }
 }

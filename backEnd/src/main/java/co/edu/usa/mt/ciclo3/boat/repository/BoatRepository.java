@@ -33,4 +33,8 @@ public class BoatRepository {
     public Boat save(Boat boat){
         return boatCrudRepository.save(boat);
     }
+    
+    public void delete(Boat boat){
+        boatCrudRepository.delete(boat);
+    }
 }

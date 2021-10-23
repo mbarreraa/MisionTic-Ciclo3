@@ -18,26 +18,61 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CategoryService {
-    
+
     @Autowired
     private CategoryRepository categoryRepository;
-    
-    public List<Category> getAll(){
+
+    public List<Category> getAll() {
         return categoryRepository.getAll();
     }
-    
-    public Category save(Category category){
-        
-        if (category.getId() == null){
+
+    public Category save(Category category) {
+
+        if (category.getId() == null) {
             return categoryRepository.save(category);
         } else {
             Optional<Category> existent = categoryRepository.getCategory(category.getId());
-            
-            if (existent.isEmpty() ){
+
+            if (existent.isEmpty()) {
                 return categoryRepository.save(category);
             } else {
                 return category;
             }
         }
+    }
+    
+    public boolean delete(int id){
+        Optional<Category> dbCategory = categoryRepository.getCategory(id);
+        boolean exito = false;
+        if (!dbCategory.isEmpty()){
+            categoryRepository.delete(dbCategory.get());
+            exito = true;
+        }
+        return exito;
+    }
+
+    public Category update(Category category) {
+
+        if (category.getId() != null) {
+            Optional<Category> dbCategory = categoryRepository.getCategory(category.getId());
+
+            if (!dbCategory.isEmpty()) {
+                if (category.getName() != null) {
+                    dbCategory.get().setName(category.getName());
+                }
+                if (category.getDescription() != null) {
+                    dbCategory.get().setDescription(category.getDescription());
+                }
+                return categoryRepository.save(dbCategory.get());
+            } else {
+                return category;
+            }
+
+        }
+        return category;
+    }
+
+    public Optional<Category> getById(int id) {
+        return categoryRepository.getCategory(id);
     }
 }

@@ -26,11 +26,15 @@ public class AdminRepository {
         return (List<Admin>) adminCrudRepository.findAll();
     }
     
-    public Optional<Admin> getBoat(int id){
+    public Optional<Admin> get(int id){
         return adminCrudRepository.findById(id);
     }
     
     public Admin save(Admin admin){
         return adminCrudRepository.save(admin);
+    }
+    
+    public void delete(Admin admin){
+        adminCrudRepository.delete(admin);
     }
 }
