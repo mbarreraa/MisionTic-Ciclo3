@@ -31,7 +31,7 @@ public class ReservationService {
         if (reservation.getIdReservation() == null){
             return reservationRepository.save(reservation);
         } else {
-            Optional<Reservation> existent = reservationRepository.getReservation(reservation.getIdReservation());
+            Optional<Reservation> existent = reservationRepository.getById(reservation.getIdReservation());
             
             if (existent.isEmpty() ){
                 return reservationRepository.save(reservation);
@@ -42,7 +42,7 @@ public class ReservationService {
     }
     
     public boolean delete(int id){
-        Optional<Reservation> dbReservation = reservationRepository.getReservation(id);
+        Optional<Reservation> dbReservation = reservationRepository.getById(id);
         boolean exito = false;
         if (!dbReservation.isEmpty()){
             reservationRepository.delete(dbReservation.get());
@@ -54,7 +54,7 @@ public class ReservationService {
     public Reservation update(Reservation reservation) {
 
         if (reservation.getIdReservation() != null) {
-            Optional<Reservation> dbReservation = reservationRepository.getReservation(reservation.getIdReservation());
+            Optional<Reservation> dbReservation = reservationRepository.getById(reservation.getIdReservation());
 
             if (!dbReservation.isEmpty()) {
                 if (reservation.getDevolutionDate()!= null) {
@@ -75,6 +75,6 @@ public class ReservationService {
     }
 
     public Optional<Reservation> getById(int id) {
-        return reservationRepository.getReservation(id);
+        return reservationRepository.getById(id);
     }
 }

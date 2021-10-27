@@ -26,7 +26,7 @@ public class BoatRepository {
         return (List<Boat>) boatCrudRepository.findAll();
     }
     
-    public Optional<Boat> getBoat(int id){
+    public Optional<Boat> getById(int id){
         return boatCrudRepository.findById(id);
     }
     

@@ -32,7 +32,7 @@ public class MessageService {
         if (message.getIdMessage() == null){
             return messageRepository.save(message);
         } else {
-            Optional<Message> existent = messageRepository.getMessage(message.getIdMessage());
+            Optional<Message> existent = messageRepository.getById(message.getIdMessage());
             
             if (existent.isEmpty() ){
                 return messageRepository.save(message);
@@ -44,7 +44,7 @@ public class MessageService {
     
     
     public boolean delete(int id){
-        Optional<Message> dbMessage = messageRepository.getMessage(id);
+        Optional<Message> dbMessage = messageRepository.getById(id);
         boolean exito = false;
         if (!dbMessage.isEmpty()){
             messageRepository.delete(dbMessage.get());
@@ -56,7 +56,7 @@ public class MessageService {
     public Message update(Message message) {
 
         if (message.getIdMessage() != null) {
-            Optional<Message> dbMessage = messageRepository.getMessage(message.getIdMessage());
+            Optional<Message> dbMessage = messageRepository.getById(message.getIdMessage());
 
             if (!dbMessage.isEmpty()) {
                 if (message.getMessageText()!= null) {
@@ -72,6 +72,6 @@ public class MessageService {
     }
 
     public Optional<Message> getById(int id) {
-        return messageRepository.getMessage(id);
+        return messageRepository.getById(id);
     }
 }

@@ -31,7 +31,7 @@ public class ScoreService {
         if (admin.getIdScore()== null){
             return scoreRepository.save(admin);
         } else {
-            Optional<Score> existent = scoreRepository.get(admin.getIdScore());
+            Optional<Score> existent = scoreRepository.getById(admin.getIdScore());
             
             if (existent.isEmpty() ){
                 return scoreRepository.save(admin);
@@ -42,7 +42,7 @@ public class ScoreService {
     }
     
     public boolean delete(int id){
-        Optional<Score> dbScore = scoreRepository.get(id);
+        Optional<Score> dbScore = scoreRepository.getById(id);
         boolean exito = false;
         if (!dbScore.isEmpty()){
             scoreRepository.delete(dbScore.get());
@@ -54,7 +54,7 @@ public class ScoreService {
     public Score update(Score reservation) {
 
         if (reservation.getIdScore()!= null) {
-            Optional<Score> dbScore = scoreRepository.get(reservation.getIdScore());
+            Optional<Score> dbScore = scoreRepository.getById(reservation.getIdScore());
 
             if (!dbScore.isEmpty()) {
                 if (reservation.getMessageText()!= null) {
@@ -72,6 +72,6 @@ public class ScoreService {
     }
 
     public Optional<Score> getById(int id) {
-        return scoreRepository.get(id);
+        return scoreRepository.getById(id);
     }
 }

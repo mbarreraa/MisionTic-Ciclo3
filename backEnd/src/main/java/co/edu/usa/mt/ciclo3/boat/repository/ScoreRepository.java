@@ -26,7 +26,7 @@ public class ScoreRepository {
         return (List<Score>) scoreCrudRepository.findAll();
     }
     
-    public Optional<Score> get(int id){
+    public Optional<Score> getById(int id){
         return scoreCrudRepository.findById(id);
     }
     

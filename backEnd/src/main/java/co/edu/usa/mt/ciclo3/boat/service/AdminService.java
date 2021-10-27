@@ -27,7 +27,7 @@ public class AdminService {
     }
     
     public Optional<Admin> getById(int id){
-        return adminRepository.get(id);
+        return adminRepository.getById(id);
     }
     
     public Admin save(Admin admin){
@@ -35,7 +35,7 @@ public class AdminService {
         if (admin.getIdAdmin()== null){
             return adminRepository.save(admin);
         } else {
-            Optional<Admin> existent = adminRepository.get(admin.getIdAdmin());
+            Optional<Admin> existent = adminRepository.getById(admin.getIdAdmin());
             
             if (existent.isEmpty() ){
                 return adminRepository.save(admin);
@@ -46,7 +46,7 @@ public class AdminService {
     }
     
     public boolean delete(int id){
-        Optional<Admin> dbAdmin = adminRepository.get(id);
+        Optional<Admin> dbAdmin = adminRepository.getById(id);
         boolean exito = false;
         if (!dbAdmin.isEmpty()){
             adminRepository.delete(dbAdmin.get());
@@ -57,10 +57,13 @@ public class AdminService {
     
     public Admin update(Admin admin) {
 
+        Admin retorno = null; // admin?
+        
         if (admin.getIdAdmin() != null) {
-            Optional<Admin> dbAdmin = adminRepository.get(admin.getIdAdmin());
-
+            Optional<Admin> dbAdmin = adminRepository.getById(admin.getIdAdmin());
+            System.out.println("dbadmin antes de cambios: " + dbAdmin.get());
             if (!dbAdmin.isEmpty()) {
+                
                 if (admin.getName() != null) {
                     dbAdmin.get().setName(admin.getName());
                 }
@@ -70,12 +73,10 @@ public class AdminService {
                 if (admin.getPassword()!= null) {
                     dbAdmin.get().setPassword(admin.getPassword());
                 }
-                return adminRepository.save(dbAdmin.get());
-            } else {
-                return admin;
-            }
-
+                System.out.println("dbadmin despues de cambios: " + dbAdmin.get());
+                retorno = adminRepository.save(dbAdmin.get());
+            } 
         }
-        return admin;
+        return retorno;
     }
 }

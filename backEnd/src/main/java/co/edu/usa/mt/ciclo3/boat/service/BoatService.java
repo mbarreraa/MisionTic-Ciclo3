@@ -31,7 +31,7 @@ public class BoatService {
         if (boat.getId() == null){
             return boatRepository.save(boat);
         } else {
-            Optional<Boat> existent = boatRepository.getBoat(boat.getId());
+            Optional<Boat> existent = boatRepository.getById(boat.getId());
             
             if (existent.isEmpty() ){
                 return boatRepository.save(boat);
@@ -42,7 +42,7 @@ public class BoatService {
     }
     
     public boolean delete(int id){
-        Optional<Boat> dbBoat = boatRepository.getBoat(id);
+        Optional<Boat> dbBoat = boatRepository.getById(id);
         boolean exito = false;
         if (!dbBoat.isEmpty()){
             boatRepository.delete(dbBoat.get());
@@ -54,7 +54,7 @@ public class BoatService {
     public Boat update(Boat boat) {
 
         if (boat.getId() != null) {
-            Optional<Boat> dbBoat = boatRepository.getBoat(boat.getId());
+            Optional<Boat> dbBoat = boatRepository.getById(boat.getId());
 
             if (!dbBoat.isEmpty()) {
                 if (boat.getName() != null) {
@@ -76,6 +76,6 @@ public class BoatService {
     }
 
     public Optional<Boat> getById(int id){
-        return boatRepository.getBoat(id);
+        return boatRepository.getById(id);
     }
 }

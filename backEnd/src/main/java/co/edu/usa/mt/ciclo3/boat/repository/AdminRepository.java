@@ -26,7 +26,7 @@ public class AdminRepository {
         return (List<Admin>) adminCrudRepository.findAll();
     }
     
-    public Optional<Admin> get(int id){
+    public Optional<Admin> getById(int id){
         return adminCrudRepository.findById(id);
     }
     

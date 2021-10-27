@@ -26,7 +26,7 @@ public class MessageRepository {
         return (List<Message>) messageCrudRepository.findAll();
     }
     
-    public Optional<Message> getMessage(int id){
+    public Optional<Message> getById(int id){
         return messageCrudRepository.findById(id);
     }
     

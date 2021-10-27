@@ -31,7 +31,7 @@ public class CategoryService {
         if (category.getId() == null) {
             return categoryRepository.save(category);
         } else {
-            Optional<Category> existent = categoryRepository.getCategory(category.getId());
+            Optional<Category> existent = categoryRepository.getById(category.getId());
 
             if (existent.isEmpty()) {
                 return categoryRepository.save(category);
@@ -42,7 +42,7 @@ public class CategoryService {
     }
     
     public boolean delete(int id){
-        Optional<Category> dbCategory = categoryRepository.getCategory(id);
+        Optional<Category> dbCategory = categoryRepository.getById(id);
         boolean exito = false;
         if (!dbCategory.isEmpty()){
             categoryRepository.delete(dbCategory.get());
@@ -54,7 +54,7 @@ public class CategoryService {
     public Category update(Category category) {
 
         if (category.getId() != null) {
-            Optional<Category> dbCategory = categoryRepository.getCategory(category.getId());
+            Optional<Category> dbCategory = categoryRepository.getById(category.getId());
 
             if (!dbCategory.isEmpty()) {
                 if (category.getName() != null) {
@@ -73,6 +73,6 @@ public class CategoryService {
     }
 
     public Optional<Category> getById(int id) {
-        return categoryRepository.getCategory(id);
+        return categoryRepository.getById(id);
     }
 }

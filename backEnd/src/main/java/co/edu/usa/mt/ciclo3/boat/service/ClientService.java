@@ -31,7 +31,7 @@ public class ClientService {
         if (client.getIdClient() == null){
             return clientRepository.save(client);
         } else {
-            Optional<Client> existent = clientRepository.getClient(client.getIdClient());
+            Optional<Client> existent = clientRepository.getById(client.getIdClient());
             
             if (existent.isEmpty() ){
                 return clientRepository.save(client);
@@ -42,7 +42,7 @@ public class ClientService {
     }
     
     public boolean delete(int id){
-        Optional<Client> dbBoat = clientRepository.getClient(id);
+        Optional<Client> dbBoat = clientRepository.getById(id);
         boolean exito = false;
         if (!dbBoat.isEmpty()){
             clientRepository.delete(dbBoat.get());
@@ -54,7 +54,7 @@ public class ClientService {
     public Client update(Client client) {
 
         if (client.getIdClient() != null) {
-            Optional<Client> dbClient = clientRepository.getClient(client.getIdClient());
+            Optional<Client> dbClient = clientRepository.getById(client.getIdClient());
 
             if (!dbClient.isEmpty()) {
                 if (client.getName() != null) {
@@ -79,6 +79,6 @@ public class ClientService {
     }
 
     public Optional<Client> getById(int id) {
-        return clientRepository.getClient(id);
+        return clientRepository.getById(id);
     }
 }
