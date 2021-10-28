@@ -12,6 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/listar.js"></script>
     <script src="js/registrar.js"></script>
+    <script src="js/borrar.js"></script>
     <script src="js/funciones.js"></script>
 </head>
 
@@ -29,6 +30,16 @@
         <button id="nuevoRegistro" onclick="activaNuevo();">Registrar Bote</button>
         <!--aqui se actualizara el listado -->
         <div id="listado"></div>
+
+         <!-- Seccion para confirmar eliminaciòn de registros-->
+         <div id="eliminar">
+            <h3 id="titleIdDelete"></h3>
+            <input type="number" id="idDelete" placeholder="id">
+            <p id="boatDelete"></p>
+            <br>
+            <button onclick="borrarRegistro(idDelete.value);">Aceptar</button>
+            <button onclick="estadoInicial();">Cancelar</button>
+        </div>
 
         <!-- Seccion para nuevos registros-->
         <div id="nuevo">

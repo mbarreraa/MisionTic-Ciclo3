@@ -1,14 +1,23 @@
+function mostrarEliminar(idRegistro,infRegistro){
+    $("#nuevo").hide();
+    $("#editar").hide();
+    $("#listado").hide();
+    $("#nuevoRegistro").hide();
+    $("#titleIdDelete").html("Desea eliminar el bote con el id: " + idRegistro + " ?...");    
+    $("#idDelete").val(idRegistro);
+    $("#boatDelete").html(infRegistro);
+    $("#eliminar").show(1000);
+}
+
 /*
     Esta función recibe como parametro el id del registro a eliminar,
     ejecuta la petición asincrona al servidor de Oracle enviando dentro de los datos 
     de la petición registro a eliminar. El tipo de petición es DELETE
 */
 function borrarRegistro(llaveRegistro) {
-    alert("Funcionalidad pendiente hasta el reto 4...")
-    /*
     //crea un objeto javascript
     let datos={
-        id: llaveRegistro
+        idClient: llaveRegistro
     }
 
     //convierte el objeto javascript a json antes de agregarlo a los datos de la petición
@@ -16,7 +25,7 @@ function borrarRegistro(llaveRegistro) {
 
     $.ajax({
         // la URL para la petición (url: "url al recurso o endpoint")
-        url: "https://g2c7d8c8e491995-db202109201320.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/boat/boat",
+        url: "http://150.230.33.49:8081/api/Boat/" + llaveRegistro,
 
         // la información a enviar
         // (también es posible utilizar una cadena de datos)
@@ -40,6 +49,7 @@ function borrarRegistro(llaveRegistro) {
             $("#mensajes").html("Registro eliminado...");
             $("#mensajes").hide(1000);
             listar();
+            estadoInicial();
         },
 
         // código a ejecutar si la petición falla;
@@ -50,5 +60,4 @@ function borrarRegistro(llaveRegistro) {
             $("#mensajes").hide(1000);
         }
     });
-    */
 }

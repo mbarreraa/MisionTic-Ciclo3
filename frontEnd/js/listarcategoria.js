@@ -74,12 +74,14 @@ function listarRespuesta(items) {
                   
     //recorre el arreglo de 'items' y construye dinamicamente la fila de datos de la tabla
     for (var i=0; i < items.length; i++) {
+        var texto = `Nombre: ${items[i].name}</br>Descripción: ${items[i].description}`;
         tabla +=`<tr>
                    <td>${items[i].name}</td>
                    <td>${items[i].description}</td>
                    <td><button onclick="mostrarmensaje()">Editar</button></td>
-                   <td><button onclick="mostrarmensaje()">Borrar</button></td>
+                   <td><button onclick="mostrarEliminar(${items[i].id},'${texto}')">Borrar</button></td>
                    </tr>`;
+        texto ="";
     }
 
     //cierra tabla agregando el tag adecuado
@@ -94,7 +96,9 @@ function estadoInicial(){
     $("#nuevo").hide();
     $("#editar").hide();
     $("#listado").show(500);
-    $("#nuevoRegistro").show(500)
+    $("#nuevoRegistro").show(500);
+    $("#eliminar").hide(); 
+    $("#idDelete").hide();
 
     //limpia el contenido de los campos del formulario nuevo
     $("#name").val("")
