@@ -66,6 +66,9 @@ public class BoatService {
                 if (boat.getYear()!= null) {
                     dbBoat.get().setYear(boat.getYear());
                 }
+                if (boat.getBrand()!= null) {
+                    dbBoat.get().setBrand(boat.getBrand());
+                }
                 return boatRepository.save(dbBoat.get());
             } else {
                 return boat;
