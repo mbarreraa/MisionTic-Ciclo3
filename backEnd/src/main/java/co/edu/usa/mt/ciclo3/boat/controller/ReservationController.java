@@ -6,6 +6,8 @@
 package co.edu.usa.mt.ciclo3.boat.controller;
 
 import co.edu.usa.mt.ciclo3.boat.model.Reservation;
+import co.edu.usa.mt.ciclo3.boat.reports.CountClient;
+import co.edu.usa.mt.ciclo3.boat.reports.ReservationStatus;
 import co.edu.usa.mt.ciclo3.boat.service.ReservationService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,5 +62,20 @@ public class ReservationController {
     @PutMapping("/update")
     public Reservation update(@RequestBody Reservation reservation) {
         return reservationService.update(reservation);
+    }
+    
+    @GetMapping("/report-status")
+    public ReservationStatus getReservationStatusReport(){
+        return reservationService.getReservationStatusReport();
+    }
+    
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+    public List<Reservation> getReservationPeriod(@PathVariable("dateOne") String dateOne, @PathVariable("dateTwo") String dateTwo) {
+        return  reservationService.getReservationPeriod(dateOne, dateTwo);
+    }
+    
+    @GetMapping("/report-clients")
+    public List<CountClient> getTopClients(){
+        return reservationService.getTopClients();
     }
 }
