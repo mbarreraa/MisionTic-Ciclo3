@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.usa.mt.ciclo3.boat.service;
 
 import co.edu.usa.mt.ciclo3.boat.model.Reservation;
@@ -18,19 +13,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- *
- * @author miguel
+ * Clase ReservationService
+ * @author Miguel Barrera
  */
 @Service
 public class ReservationService {
 
     @Autowired
+    /**
+     * Repositorio de reservas
+     */
     private ReservationRepository reservationRepository;
 
+    /**
+     * Obtiene todas las reservas
+     * @return lista de todas las reservas
+     */
     public List<Reservation> getAll() {
         return reservationRepository.getAll();
     }
 
+    /**
+     * Inserta un reserva
+     * @param reservation
+     * @return reserva almacenada
+     */
     public Reservation save(Reservation reservation) {
 
         if (reservation.getIdReservation() == null) {
@@ -46,6 +53,11 @@ public class ReservationService {
         }
     }
 
+    /**
+     * Borra una reserva por su identificador
+     * @param id identificador de la reserva a eliminar
+     * @return true si se elimino correctamente, false si fallo la eliminacion
+     */
     public boolean delete(int id) {
         Optional<Reservation> dbReservation = reservationRepository.getById(id);
         boolean exito = false;
@@ -56,6 +68,11 @@ public class ReservationService {
         return exito;
     }
 
+    /**
+     * Actualiza los datos de una reservas
+     * @param reservation reserva a actualizar
+     * @return reserva actualizada
+     */
     public Reservation update(Reservation reservation) {
 
         if (reservation.getIdReservation() != null) {
@@ -79,16 +96,31 @@ public class ReservationService {
         return reservation;
     }
 
+    /**
+     * Obtiene una reserva por su identificador
+     * @param id identificador de la reserva a buscar
+     * @return reserva encontrada
+     */
     public Optional<Reservation> getById(int id) {
         return reservationRepository.getById(id);
     }
 
+    /**
+     * Genera reporte de las reservas que se encuentran en estado completed y cancelled
+     * @return informe de reservas
+     */
     public ReservationStatus getReservationStatusReport() {
         List<Reservation> completed = reservationRepository.getReservationByStatus("completed");
         List<Reservation> cancelled = reservationRepository.getReservationByStatus("cancelled");
         return new ReservationStatus(completed.size(), cancelled.size());
     }
 
+    /**
+     * Obtiene las reservas en un periodo de tiempo
+     * @param dateOne fecha incial
+     * @param dateTwo fecha final
+     * @return listado de reservas en el periodo de tiempo
+     */
     public List<Reservation> getReservationPeriod(String dateOne, String dateTwo) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -105,6 +137,10 @@ public class ReservationService {
         return new ArrayList<>();
     }
     
+    /**
+     * Obtiene el top de clientes acorde con las reservas realizadas
+     * @return top de clientes descendente con las reservas realizadas.
+     */
     public List<CountClient> getTopClients(){
         return reservationRepository.getTopClients();
     }

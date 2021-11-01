@@ -52,11 +52,13 @@ public class CategoryController {
     }
     
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable int id) {
         return categoryService.delete(id);
     }
     
     @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED) 
     public Category update(@RequestBody Category category) {
         return categoryService.update(category);
     }
