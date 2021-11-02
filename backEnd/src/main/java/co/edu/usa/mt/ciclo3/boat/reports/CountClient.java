@@ -13,22 +13,22 @@ import co.edu.usa.mt.ciclo3.boat.model.Client;
  */
 public class CountClient {
     
-    private Double total;
+    private Long total;
     private Client client;
 
     public CountClient() {
-    }
+    }   
 
-    public CountClient(Double total, Client client) {
+    public CountClient(Long total, Client client) {
         this.total = total;
         this.client = client;
     }
 
-    public Double getTotal() {
+    public Long getTotal() {
         return total;
     }
 
-    public void setTotal(Double total) {
+    public void setTotal(Long total) {
         this.total = total;
     }
 
@@ -39,7 +39,6 @@ public class CountClient {
     public void setClient(Client client) {
         this.client = client;
     }
-    
     
     
 }
